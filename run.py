@@ -18,8 +18,8 @@ import os
 keep_alive()
 
 twitch_miner = TwitchChannelPointsMiner(
-    username=os.environ.get('username'),
-    password=os.environ.get('password'),           # If no password will be provided, the script will ask interactively
+    username=os.environ.get('user'),
+    password=os.environ.get('passw'),           # If no password will be provided, the script will ask interactively
     claim_drops_startup=False,                  # If you want to auto claim all drops from Twitch inventory on the startup
     priority=[                                  # Custom priority in this case for example:
         Priority.STREAK,                        # - We want first of all to catch all watch streak from all streamers
@@ -30,7 +30,7 @@ twitch_miner = TwitchChannelPointsMiner(
     disable_ssl_cert_verification=False,        # Set to True at your own risk and only to fix SSL: CERTIFICATE_VERIFY_FAILED error
     disable_at_in_nickname=False,               # Set to True if you want to check for your nickname mentions in the chat even without @ sign
     logger_settings=LoggerSettings(
-        save=True,                              # If you want to save logs in a file (suggested)
+        save=False,                              # If you want to save logs in a file (suggested)
         console_level=logging.INFO,             # Level of logs - use logging.DEBUG for more info
         console_username=False,                 # Adds a username to every console log line if True. Also adds it to Telegram, Discord, etc. Useful when you have several accounts
         auto_clear=True,                        # Create a file rotation handler with interval = 1D and backupCount = 7 if True (default)
@@ -56,28 +56,14 @@ twitch_miner = TwitchChannelPointsMiner(
             events=[Events.STREAMER_ONLINE, Events.STREAMER_OFFLINE,
                     Events.BET_LOSE, Events.CHAT_MENTION],                                  # Only these events will be sent to the chat
         ),
-        matrix=Matrix(
-            username="twitch_miner",                                                   # Matrix username (without homeserver)
-            password="...",                                                            # Matrix password
-            homeserver="matrix.org",                                                   # Matrix homeserver
-            room_id="...",                                                             # Room ID
-            events=[Events.STREAMER_ONLINE, Events.STREAMER_OFFLINE, Events.BET_LOSE], # Only these events will be sent to the chat
-        ),
-        pushover=Pushover(
-            userkey="YOUR-ACCOUNT-TOKEN",                                             # Login to https://pushover.net/, the user token is on the main page.
-            token="YOUR-APPLICATION-TOKEN",                                           # Create a application on the website, and use the token shown in your application.
-            priority=0,                                                               # Read more about priority here: https://pushover.net/api#priority
-            sound="pushover",                                                         # A list of sounds can be found here: https://pushover.net/api#sounds
-            events=[Events.CHAT_MENTION, Events.DROP_CLAIM],                          # Only these events will be sent.
-        )
     ),
     streamer_settings=StreamerSettings(
         make_predictions=True,                  # If you want to Bet / Make prediction
-        follow_raid=True,                       # Follow raid to obtain more points
+        follow_raid=True,                      # Follow raid to obtain more points
         claim_drops=True,                       # We can't filter rewards base on stream. Set to False for skip viewing counter increase and you will never obtain a drop reward from this script. Issue #21
         claim_moments=True,                     # If set to True, https://help.twitch.tv/s/article/moments will be claimed when available
         watch_streak=True,                      # If a streamer go online change the priority of streamers array and catch the watch screak. Issue #11
-        chat=ChatPresence.ONLINE,               # Join irc chat to increase watch-time [ALWAYS, NEVER, ONLINE, OFFLINE]
+        chat=ChatPresence.NEVER,               # Join irc chat to increase watch-time [ALWAYS, NEVER, ONLINE, OFFLINE]
         bet=BetSettings(
             strategy=Strategy.SMART,            # Choose you strategy!
             percentage=5,                       # Place the x% of your channel points
@@ -108,14 +94,142 @@ twitch_miner = TwitchChannelPointsMiner(
 
 twitch_miner.mine(
     [
-       Streamer("pimpcs", settings=StreamerSettings(make_predictions=True  , follow_raid=False , claim_drops=True  , watch_streak=True , bet=BetSettings(strategy=Strategy.SMART      , percentage=5 , stealth_mode=True,  percentage_gap=20 , max_points=234   , filter_condition=FilterCondition(by=OutcomeKeys.TOTAL_USERS,      where=Condition.LTE, value=800 ) ) )),
-       Streamer("ohnepixel", settings=StreamerSettings(make_predictions=True  , follow_raid=True , claim_drops=True  , watch_streak=True , bet=BetSettings(strategy=Strategy.SMART      , percentage=5 , stealth_mode=True,  percentage_gap=20 , max_points=234   , filter_condition=FilterCondition(by=OutcomeKeys.TOTAL_USERS,      where=Condition.LTE, value=800 ) ) )),
-       Streamer("lobanjicaa", settings=StreamerSettings(make_predictions=True , follow_raid=True  , claim_drops=False ,                     bet=BetSettings(strategy=Strategy.PERCENTAGE , percentage=5 , stealth_mode=False, percentage_gap=20 , max_points=1234  , filter_condition=FilterCondition(by=OutcomeKeys.TOTAL_POINTS,     where=Condition.GTE, value=250 ) ) )),
-       Streamer("olofmeister", settings=StreamerSettings(make_predictions=True , follow_raid=True  , claim_drops=False ,                     bet=BetSettings(strategy=Strategy.PERCENTAGE , percentage=5 , stealth_mode=False, percentage_gap=20 , max_points=1234  , filter_condition=FilterCondition(by=OutcomeKeys.TOTAL_POINTS,     where=Condition.GTE, value=250 ) ) )),
-       Streamer("get_right", settings=StreamerSettings(make_predictions=True , follow_raid=True  , claim_drops=False ,                     bet=BetSettings(strategy=Strategy.PERCENTAGE , percentage=5 , stealth_mode=False, percentage_gap=20 , max_points=1234  , filter_condition=FilterCondition(by=OutcomeKeys.TOTAL_POINTS,     where=Condition.GTE, value=250 ) ) )),
-       Streamer("haixxd", settings=StreamerSettings(make_predictions=False , follow_raid=True  , claim_drops=False ,                     bet=BetSettings(strategy=Strategy.PERCENTAGE , percentage=5 , stealth_mode=False, percentage_gap=20 , max_points=1234  , filter_condition=FilterCondition(by=OutcomeKeys.TOTAL_POINTS,     where=Condition.GTE, value=250 ) ) )),
-       Streamer("shoxiejesuss", settings=StreamerSettings(make_predictions=True , follow_raid=True  , claim_drops=False ,                     bet=BetSettings(strategy=Strategy.PERCENTAGE , percentage=5 , stealth_mode=False, percentage_gap=20 , max_points=1234  , filter_condition=FilterCondition(by=OutcomeKeys.TOTAL_POINTS,     where=Condition.GTE, value=250 ) ) )),
-       Streamer("gunthersuper", settings=StreamerSettings(make_predictions=True  , follow_raid=False , claim_drops=True  , watch_streak=True , bet=BetSettings(strategy=Strategy.SMART      , percentage=5 , stealth_mode=True,  percentage_gap=20 , max_points=234   , filter_condition=FilterCondition(by=OutcomeKeys.TOTAL_USERS,      where=Condition.LTE, value=800 ) ) ))
+      Streamer("easportsfc"),
+# Rainbow 6
+        Streamer("ubisoft"),
+        Streamer("rainbow6"),
+        Streamer("rainbow6de"),
+        Streamer("rainbow6jp"),
+        Streamer("rainbow6kr"),
+        Streamer("rainbow6bravo"),
+        Streamer("rainbow6br"),
+#        Streamer(""varsitygaming"),
+#        Streamer(""maciejay"),
+# Rainbow 6 END
+
+# Call of Duty
+        Streamer("callofduty"),
+# Call of Duty END
+
+# Rocketleague
+      Streamer("RocketLeague"),
+      Streamer("rocketstreetlive"),
+      Streamer("firstkiller"),
+      Streamer("unirocketeers"),
+      #Streamer("jamaicancoconut"),
+      #Streamer("garrettg"),
+      #Streamer("rizzo"),
+# Rocketleague END
+
+# Halo
+       Streamer("LVTHalo"),
+       Streamer("europeanhalo"),
+       Streamer("twitchgaming"),
+       Streamer("Halo"),
+       Streamer("HCS"),
+       Streamer("hcs_red"),
+       Streamer("hcs_blue"),
+       Streamer("reallifespartan"),
+      Streamer("atlasgg1"),
+      Streamer("stresss"),
+      #Streamer("reclximer"),
+      #Streamer("rangercali"),
+      #Streamer("europahalo"),
+      #Streamer("nmsggoficial"),
+      #Streamer("rangercali"),
+      #Streamer("complexity"),
+      #Streamer("luciid_tw"),
+      #Streamer("eli_x"),
+      #Streamer("elamite"),
+      #Streamer("hunter_jjx"),
+#Halo END
+
+# Call of Duty
+      #Streamer("symfuhny"),
+      #Streamer("aydan"),
+      #Streamer("mrbluwu"),
+      #Streamer("riskin"),
+      #Streamer("iddqd"),
+# Call of Duty END
+      # VARIO
+       Streamer("m0ann"),
+       Streamer("britva_games"),
+       Streamer("trisarahtops91"),
+      #Streamer("jambo"),
+      #Streamer("lyric"),
+      #Streamer("mixwell"),
+      #Streamer("noko"),
+      #Streamer("gigz"),
+      # VARIO
+# overwatchcontenders
+      Streamer("playoverwatch"),
+      Streamer("ml7support"),
+      Streamer("emongg"),
+      Streamer("nektagg"),
+      Streamer("overwatchcontenders"),
+      Streamer("playoverwatchjp"),
+      Streamer("overwatchesportskr"),
+      # Streamer("evalangwin"),
+      # Streamer("august"),
+      # Streamer("iddqd"),
+# overwatchcontenders ENDE
+
+# VARIO
+       Streamer("beardageddon"),
+      #Streamer("streamerhouse"),
+      Streamer("drooooooooooopy"),
+      #Streamer("edi4ttv"),
+      #Streamer("neevee_o7"),
+      #Streamer("movementbuff"),
+     Streamer("paydaythegame"),
+        Streamer("forhonorgame"),
+      #Streamer("evalangwin"),
+      #Streamer("somnus"),
+      #Streamer("iddqd"),
+      # Streamer("reneesky"),
+      # Streamer("copeylius"),
+      # Streamer("2dkiri"),
+       Streamer("gothicsnowangel"),
+      #Streamer("lopes_gaming"),
+      # Streamer("laranity"),
+      # Streamer("schneeschnuffelhase"),
+      # Streamer("anniefuchsia"),
+      #Streamer("pubg_battlegrounds"),
+      # Streamer("pubgthailandofficial"),
+      # Streamer("pubg_br"),
+      # Streamer("ovidiuz94"),
+      # Streamer("mdee14"),
+      # Streamer("pepp3rpotts"),
+      # Streamer("daijoburu"),
+      # Streamer("neevee_o7"),
+      # Streamer("rifas"),
+      # Streamer("introjuegos"),
+      # Streamer("zara"),
+      # Streamer("pirolino1966"),
+      # Streamer("scorpio"),
+      # Streamer("simuverserden"),
+# VARIO END
+
+# The Elder Scrolls Online
+        Streamer("bethesda_de"),
+        Streamer("bethesda_nl"),
+        Streamer("bethesda"),
+      #Streamer("backyardis"),
+# The Elder Scrolls Online ENDE
+
+# NUR Punkten   
+        Streamer("hitsquadgodfather"),
+        Streamer("lenovolegion"),
+        Streamer("redrewards"),
+        Streamer("alienware"),
+        Streamer("xboxon"),
+        Streamer("cohhcarnage"),
+        Streamer("tygerladi"),
+        Streamer("staggerrilla"),
+        Streamer("nuclearqueso"),
+        Streamer("homiedrew")
+# NUR Punkten END
+
     ],                                  # Array of streamers (order = priority)
     followers=False,                    # Automatic download the list of your followers
     followers_order=FollowersOrder.ASC  # Sort the followers list by follow date. ASC or DESC
