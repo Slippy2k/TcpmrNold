@@ -94,133 +94,17 @@ twitch_miner = TwitchChannelPointsMiner(
 
 twitch_miner.mine(
     [
-      Streamer("easportsfc"),
-# Rainbow 6
-        Streamer("ubisoft"),
-        Streamer("rainbow6"),
-        Streamer("rainbow6de"),
-        Streamer("rainbow6jp"),
-        Streamer("rainbow6kr"),
-        Streamer("rainbow6bravo"),
-        Streamer("rainbow6br"),
-#        Streamer(""varsitygaming"),
-#        Streamer(""maciejay"),
-# Rainbow 6 END
-
-# Call of Duty
-        Streamer("callofduty"),
-# Call of Duty END
-
 # Rocketleague
-      Streamer("RocketLeague"),
-      Streamer("rocketstreetlive"),
-      Streamer("firstkiller"),
-      Streamer("unirocketeers"),
-      #Streamer("jamaicancoconut"),
-      #Streamer("garrettg"),
-      #Streamer("rizzo"),
-# Rocketleague END
-
-# Halo
-       Streamer("LVTHalo"),
-       Streamer("europeanhalo"),
-       Streamer("twitchgaming"),
-       Streamer("Halo"),
-       Streamer("HCS"),
-       Streamer("hcs_red"),
-       Streamer("hcs_blue"),
-       Streamer("reallifespartan"),
-      Streamer("atlasgg1"),
-      Streamer("stresss"),
-      #Streamer("reclximer"),
-      #Streamer("rangercali"),
-      #Streamer("europahalo"),
-      #Streamer("nmsggoficial"),
-      #Streamer("rangercali"),
-      #Streamer("complexity"),
-      #Streamer("luciid_tw"),
-      #Streamer("eli_x"),
-      #Streamer("elamite"),
-      #Streamer("hunter_jjx"),
-#Halo END
-
-# Call of Duty
-      #Streamer("symfuhny"),
-      #Streamer("aydan"),
-      #Streamer("mrbluwu"),
-      #Streamer("riskin"),
-      #Streamer("iddqd"),
-# Call of Duty END
-      # VARIO
-       Streamer("m0ann"),
-       Streamer("britva_games"),
-       Streamer("trisarahtops91"),
-      #Streamer("jambo"),
-      #Streamer("lyric"),
-      #Streamer("mixwell"),
-      #Streamer("noko"),
-      #Streamer("gigz"),
-      # VARIO
-# overwatchcontenders
-      Streamer("playoverwatch"),
-      Streamer("ml7support"),
-      Streamer("emongg"),
-      Streamer("nektagg"),
-      Streamer("overwatchcontenders"),
-      Streamer("playoverwatchjp"),
-      Streamer("overwatchesportskr"),
-      # Streamer("evalangwin"),
-      # Streamer("august"),
-      # Streamer("iddqd"),
-# overwatchcontenders ENDE
-
-# VARIO
-       Streamer("beardageddon"),
-      #Streamer("streamerhouse"),
-      Streamer("drooooooooooopy"),
-      #Streamer("edi4ttv"),
-      #Streamer("neevee_o7"),
-      #Streamer("movementbuff"),
-     Streamer("paydaythegame"),
-        Streamer("forhonorgame"),
-      #Streamer("evalangwin"),
-      #Streamer("somnus"),
-      #Streamer("iddqd"),
-      # Streamer("reneesky"),
-      # Streamer("copeylius"),
-      # Streamer("2dkiri"),
-       Streamer("gothicsnowangel"),
-      #Streamer("lopes_gaming"),
-      # Streamer("laranity"),
-      # Streamer("schneeschnuffelhase"),
-      # Streamer("anniefuchsia"),
-      #Streamer("pubg_battlegrounds"),
-      # Streamer("pubgthailandofficial"),
-      # Streamer("pubg_br"),
-      # Streamer("ovidiuz94"),
-      # Streamer("mdee14"),
-      # Streamer("pepp3rpotts"),
-      # Streamer("daijoburu"),
-      # Streamer("neevee_o7"),
-      # Streamer("rifas"),
-      # Streamer("introjuegos"),
-      # Streamer("zara"),
-      # Streamer("pirolino1966"),
-      # Streamer("scorpio"),
-      # Streamer("simuverserden"),
-# VARIO END
-
-# The Elder Scrolls Online
-        Streamer("bethesda_de"),
-        Streamer("bethesda_nl"),
-        Streamer("bethesda"),
-      #Streamer("backyardis"),
-# The Elder Scrolls Online ENDE
-
-# NUR Punkten   
+        Streamer("rocketleague"),
+        Streamer("firstkiller"),
+        Streamer("jamaicancoconut"),
+        Streamer("garrettg"),
+        Streamer("rizzo"),
+# Rocketleague ENDE
+# NUR Punkten
         Streamer("hitsquadgodfather"),
-        Streamer("lenovolegion"),
         Streamer("redrewards"),
+        Streamer("lenovolegion"),
         Streamer("alienware"),
         Streamer("xboxon"),
         Streamer("cohhcarnage"),
