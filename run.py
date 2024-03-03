@@ -101,6 +101,8 @@ twitch_miner.mine(
         Streamer("garrettg"),
         Streamer("rizzo"),
 # Rocketleague ENDE
+                Streamer("yunakura"),
+        
 # NUR Punkten
         Streamer("hitsquadgodfather"),
         Streamer("redrewards"),
